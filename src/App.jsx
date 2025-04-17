@@ -104,7 +104,7 @@ const App = () => {
         <>
           <Navigation onSectionChange={handleSectionChange} />
           
-          <main className="snap-y snap-mandatory h-screen overflow-y-scroll px-4 md:px-12">
+          <main className="snap-y snap-mandatory h-screen overflow-y-scroll">
             <section id="home" ref={sectionRefs.current.home} className="snap-start h-screen">
               <Home />
             </section>

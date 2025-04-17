@@ -46,39 +46,112 @@ const Home = () => {
       transition={{ duration: 0.5 }}
       className="flex flex-col items-center justify-center min-h-screen relative overflow-hidden px-4"
     >
-      {/* Animated background elements */}
+      {/* Modified animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
-        {[...Array(6)].map((_, i) => (
+        {/* Animated grid lines */}
+        <div className="absolute inset-0 opacity-10">
+          <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+                <path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(147, 51, 234, 0.5)" strokeWidth="0.5" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#grid)" />
+          </svg>
+        </div>
+
+        {/* Floating particles */}
+        {[...Array(15)].map((_, i) => (
           <motion.div
-            key={`bg-circle-${i}`}
-            className="absolute rounded-full bg-gradient-to-br from-purple-500 to-pink-500 opacity-5"
+            key={`particle-${i}`}
+            className="absolute rounded-full bg-gradient-to-br from-purple-500 to-pink-500"
             initial={{ 
-              left: `${Math.random() * 100}%`, 
-              top: `${Math.random() * 100}%`,
-              scale: Math.random() * 0.5 + 0.5,
-              rotate: Math.random() * 180
+              x: `${Math.random() * 100}vw`, 
+              y: `${Math.random() * 100}vh`,
+              opacity: Math.random() * 0.2 + 0.1,
             }}
             animate={{
-              y: [0, -30, 0],
-              rotate: i % 2 === 0 ? [0, 180] : [180, 0],
-              scale: [
-                Math.random() * 0.5 + 0.5,
-                Math.random() * 0.8 + 0.8,
-                Math.random() * 0.5 + 0.5
+              x: [
+                `${Math.random() * 100}vw`,
+                `${Math.random() * 100}vw`,
+                `${Math.random() * 100}vw`
+              ],
+              y: [
+                `${Math.random() * 100}vh`,
+                `${Math.random() * 100}vh`,
+                `${Math.random() * 100}vh`
+              ],
+              opacity: [
+                Math.random() * 0.2 + 0.1,
+                Math.random() * 0.3 + 0.2,
+                Math.random() * 0.2 + 0.1
               ]
             }}
             transition={{
-              duration: Math.random() * 20 + 15,
+              duration: Math.random() * 20 + 30,
               repeat: Infinity,
-              ease: "easeInOut"
+              ease: "linear"
             }}
             style={{
-              width: `${Math.random() * 300 + 100}px`,
-              height: `${Math.random() * 300 + 100}px`,
-              filter: 'blur(60px)'
+              width: `${Math.random() * 6 + 2}px`,
+              height: `${Math.random() * 6 + 2}px`,
             }}
           />
         ))}
+
+        {/* Animated gradient overlay */}
+        <motion.div
+          className="absolute inset-0 bg-gradient-to-tr from-purple-900/20 to-pink-900/20"
+          animate={{
+            backgroundPosition: ['0% 0%', '100% 100%'],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            repeatType: "reverse",
+            ease: "linear"
+          }}
+        />
+
+        {/* Animated wave patterns */}
+        <svg
+          className="absolute bottom-0 left-0 w-full opacity-10"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1440 320"
+        >
+          <motion.path
+            fill="#8b5cf6"
+            fillOpacity="0.5"
+            animate={{
+              d: [
+                "M0,192L48,176C96,160,192,128,288,128C384,128,480,160,576,165.3C672,171,768,149,864,149.3C960,149,1056,171,1152,176C1248,181,1344,171,1392,165.3L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z",
+                "M0,224L48,213.3C96,203,192,181,288,170.7C384,160,480,160,576,176C672,192,768,224,864,224C960,224,1056,192,1152,176C1248,160,1344,160,1392,160L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+              ]
+            }}
+            transition={{
+              duration: 10,
+              repeat: Infinity,
+              repeatType: "reverse",
+              ease: "easeInOut"
+            }}
+          />
+          <motion.path
+            fill="#ec4899"
+            fillOpacity="0.5"
+            animate={{
+              d: [
+                "M0,288L48,272C96,256,192,224,288,197.3C384,171,480,149,576,154.7C672,160,768,192,864,192C960,192,1056,160,1152,154.7C1248,149,1344,171,1392,181.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z",
+                "M0,256L48,234.7C96,213,192,171,288,160C384,149,480,171,576,181.3C672,192,768,192,864,202.7C960,213,1056,235,1152,229.3C1248,224,1344,192,1392,176L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+              ]
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              repeatType: "reverse",
+              ease: "easeInOut"
+            }}
+          />
+        </svg>
       </div>
 
       {/* Main content */}
